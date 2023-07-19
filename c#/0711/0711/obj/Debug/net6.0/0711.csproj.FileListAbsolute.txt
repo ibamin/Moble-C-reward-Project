@@ -1,0 +1,15 @@
+C:\MyMoble\c#\0711\0711\bin\Debug\net6.0\0711.exe
+C:\MyMoble\c#\0711\0711\bin\Debug\net6.0\0711.deps.json
+C:\MyMoble\c#\0711\0711\bin\Debug\net6.0\0711.runtimeconfig.json
+C:\MyMoble\c#\0711\0711\bin\Debug\net6.0\0711.dll
+C:\MyMoble\c#\0711\0711\bin\Debug\net6.0\0711.pdb
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.csproj.AssemblyReference.cache
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.AssemblyInfoInputs.cache
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.AssemblyInfo.cs
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.csproj.CoreCompileInputs.cache
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.dll
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\refint\0711.dll
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.pdb
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\0711.genruntimeconfig.cache
+C:\MyMoble\c#\0711\0711\obj\Debug\net6.0\ref\0711.dll

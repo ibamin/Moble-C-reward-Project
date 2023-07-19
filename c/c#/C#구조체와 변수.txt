@@ -1,0 +1,582 @@
+문자열형 : 포인터처럼 참조 변수 object와 동일하게 동작 하지만 object의 하위호환
+//예제 코드
+using System;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string str1 = "안녕하세요.";
+            string str2 = "모블 교육센터입니다.";
+
+            Console.WriteLine(str1);
+            Console.WriteLine(str2);
+            Console.WriteLine($"{str2[1]}");
+
+            string str3 = "c:\\temp\\test.txt";
+            Console.WriteLine(str3);
+
+            string str4 = "c:\temp\test.txt";
+            Console.WriteLine(str4);
+        }
+    }
+}
+
+문자열 합치기
+using System;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string str1 = "Hello_";
+            string str2 = "World";
+            string str3 = str1 + str2;
+            string str4 = "program" + "ming";
+            WriteLine($"{str3} {str4}");
+            WriteLine(str3[4]);
+        }
+    }
+}
+
+string 클래스가 제공하는 다양한 메소드가 존재
+//예제 1 문자열 길이 및 시작,끝문자열 제어
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string greeting = "Good Morning";
+
+            WriteLine(greeting);
+            WriteLine();
+
+            WriteLine($"indexof \"Good\":{greeting.IndexOf("Good")}");
+            WriteLine($"indexof 'o':{greeting.IndexOf('o')}");
+
+            WriteLine($"indexof \"Good\":{greeting.LastIndexOf("Good")}");
+            WriteLine($"indexof 'o':{greeting.LastIndexOf('o')}");
+
+            WriteLine($"indexof \"Good\":{greeting.StartsWith("Good")}");
+            WriteLine($"indexof 'o':{greeting.StartsWith("Morning")}");
+
+            WriteLine($"indexof \"Good\":{greeting.EndsWith("Good")}");
+            WriteLine($"indexof 'o':{greeting.EndsWith("Morning")}");
+
+            WriteLine($"indexof \"Evening\":{greeting.Contains("Evening")}");
+            WriteLine($"indexof 'o':{greeting.Contains("Morning")}");
+
+            WriteLine($"Replaced \"Morning\" with \"Evening\":{greeting.Replace("Morning","Evening")}");
+        }
+    }
+}
+//예제 2 공백제어
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteLine($"ToLower():{"ABC".ToLower()}");
+            WriteLine($"ToUpper():{"ABC".ToUpper()}");
+
+            WriteLine($"Insert():{"Happy Friday!".Insert(5, "Sunny")}");
+            WriteLine($"Remove():{"I Don't Love You.".Remove(2, 6)}");
+
+            WriteLine($"Trim():{" No Spaces ".Trim()}");
+            WriteLine($"TrimStart():{" No Spaces ".TrimStart()}");
+            WriteLine($"TrimEnd():{ "No Spaces ".TrimEnd()}");
+        }
+    }
+}
+//예제3 문자열 분할
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string greeting = "Good morning.";
+
+            WriteLine(greeting.Substring(0,5));
+            WriteLine(greeting.Substring(5));
+
+            string[] arr = greeting.Split(' ');
+            WriteLine($"Word Count :{arr.Length}");
+        }
+    }
+}
+
+var(암시적 데이터형)
+대입되는 데이터에 따라 데이터형 결정
+-var키워드로 변수 선언
+-object안들어감 객체는 몰루?
+-선언과 동시에 초기화
+//예시 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var value1 = 3.14f;
+            float value2 = 10.0f;
+            float sum=value1+ value2;
+            WriteLine($"{value1:f1}/{value2}/{value2:f}/{value2:f1}/{sum}");
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            var a = 20;
+            WriteLine($"Type : {a.GetType()}, value : {a}");
+            
+            var b = 3.14;
+            var c = "Hello,World!";
+            var d = new int[] { 10, 20, 30 };
+            WriteLine($"{b} / {c} / {d[0]},{d[1]},{d[2]}");
+        }
+    }
+}
+
+nullable형 :0이 아닌 비어 있는 변수 즉 null값이 필요할 때 사용 (참조가 아닌 값형식에만 사용가능)
+var와 object,string에 사용불가능
+attribute
+-HasValue : 값이 널인지 아닌지 체크하는 속성
+-Value : 실제값 반환하는 속성
+//예시 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+           int? num1 = null;
+
+            WriteLine(num1.HasValue);
+            if(num1 != null)
+            {
+                WriteLine(num1.Value);
+            }
+            num1 = 150;
+            WriteLine($"{num1.HasValue}");
+            WriteLine(num1.Value);
+        }
+    }
+}
+
+형변환
+명시적 형변환
+작은 자료형 -> 큰 자료형은 정밀도 손상이 일어난다.
+큰 자료형 -> 작은 자료형 이러한 경우는 데이터 손실이 발생한다.
+내부 함수로 형변환
+기본 데이터형.Parse(바꾸고 싶은 데이터를 가진 변수)
+//예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int value1 = 127;
+            string str1 =value1.ToString();
+            WriteLine($"value1의 값이 문자열로 변경되는지 확인={str1+1}");
+
+            int value2 =Convert.ToInt32(str1);
+            WriteLine($"str1의 값이 정수로 바뀌었는지 확인 {value2 + 1}");
+
+            string str2 = "3.14";
+            float value3= float.Parse(str2);
+            WriteLine($"str2의 값이 실수로 바뀌었는지 확인 ={value3 + 1}");
+        }
+    }
+}
+//예제 코드2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteLine(int.Parse("52").GetType());
+            WriteLine(long.Parse("273").GetType());
+            WriteLine(float.Parse("52.273").GetType());
+            WriteLine(double.Parse("103.32").GetType());
+        }
+    }
+}
+//예제 3
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            WriteLine(int.Parse("52").GetType());             
+            WriteLine(long.Parse("273").GetType());           
+            WriteLine(float.Parse("52.273").GetType());       
+            WriteLine(double.Parse("103.32").GetType());
+
+            WriteLine(int.Parse("52.273"));
+            WriteLine(int.Parse("abc"));
+
+            WriteLine(bool.Parse("True"));
+            WriteLine(bool.Parse("string"));
+        }                                                     
+    }                                                         
+}                                                             
+
+박싱 : 데이터형을 최상위 object형으로 변환하여 값형식의 데이터를 참조형식의 heap에 저장
+ex)
+int m=123;
+object obj=m;
+언박싱 : heap메모리에 저장된 형식을 다시 값 형식으로 변환 stack에 저장
+ex)
+object obj=20;
+int a= obj;
+
+var형과 object의 차이점
+object는 박싱과 언박싱을 통해 값을 저장하기 떄문에 기존의 값과 타입이 변경되어도 의도한 대로 값이 저장됨
+(기존의 박싱된 상자를 지우고 새로 박싱하여 힙에 저장한 뒤 주소를 바꾸면됨) 
+하지만 var는 컴파일러가 변수를 생성할때 값을 보고 타입을 추론해서 스택에 값을 저장하기 때문에 한번 선언된 타입을 바꿀 수없음
+(int형 테이터면 메모리에 4byte영역을 할당하기 때문에 8byte의 double형으로 바꿔 덮어쓰는 것이 불가능함)
+
+구조체
+string(클래스로 선어됨)을 제외한 모든것들이 구조체로 선언되어있음
+생성자 (매개변수는 있지만 리턴은없음)
+클래스를 통해 만들어지는 변수같은 녀석들 : 객체(인스턴스)
+객체는 초기화를 생성자를 통해 진행함
+클래스명 변수명 = new 생성자
+new라는 것으로 지정
+구조체에 멤버를 만들고 초기화를 해주지 않으면 자동 0으로 초기화
+구조체에서 멤버초기화는 const,static만 초기화 가능
+구조체는 생성자가 없어도 사용가능 
+//예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
+using System.Text;
+using System.Threading.Tasks;
+using static System.Console;
+
+namespace _0711
+{
+    public struct Mystruct
+    {
+        public const float PI = 3.141559f;
+        public static int age = 27;
+        public int val;
+        public string a=null;
+        public string b=null;
+        public Mystruct(int val)
+        {
+            this.val = val;
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //Mystruct a=new Mystruct();
+            //a.val = 12;
+            //WriteLine(a.val);
+            //
+            //Mystruct b = new Mystruct();
+            //b.val = 13;
+            //WriteLine(b.val); 
+
+            Mystruct mystruct = new Mystruct();
+            WriteLine("age 입력");
+            mystruct.val=int.Parse(Console.ReadLine());
+            WriteLine("구조체 멤버 age={0}", mystruct.val);
+
+            WriteLine("문자열 멤버 입력");
+            mystruct.a=Console.ReadLine();
+            mystruct.b=Console.ReadLine();
+            WriteLine($"{mystruct.a}, {mystruct.b}"); 
+        }                                                     
+    }                                                         
+}                                                             
+                                                                                                                 
+//예제2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    public struct Mystruct
+    {
+        public int age;
+        public float num;
+        public bool isReady;
+        public Mystruct(int age, float num,bool isReady)
+        {
+            this.age = age; this.num=num;this.isReady = isReady;
+        }
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Mystruct a;
+            Mystruct test4 = new Mystruct();
+            a.age = 12; 
+            Console.WriteLine(a.age);
+
+            Mystruct b= new Mystruct();
+            Console.WriteLine($"{b.age},{b.num},{b.isReady}");
+
+            Mystruct c= new Mystruct(13,40,true);
+            Console.WriteLine($"{c.age},{c.num},{c.isReady}");
+
+            test4 = c;
+            Console.WriteLine($"{test4.age},{test4.num},{test4.isReady}");
+
+        }
+    }
+}
+
+구조체와 클래스의 차이
+구조체는 깊은 복사가 되고 
+클래스의 대입연산자 같은경우 주소값을 넘기기때문에 두 클래스가 가리키는 값은 똑같다 즉 둘중하나의
+클래스에서 값을 변경한다면 다른 클래스에서 출력해도 변경된다 즉 클래스의 모든 변수가 static형식과 같은 형태가
+된다
+//예제코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    public struct Mystruct
+    {
+        public int age;
+    }
+    public class MyClass
+    {
+        public int age;    
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Mystruct a = new Mystruct();
+            a.age = 12;
+            Mystruct b = a;
+            b.age = 24;
+            Console.WriteLine($"{a.age} , {b.age}");
+
+            MyClass c = new MyClass();
+            c.age = 12;
+            MyClass d = c;
+            d.age = 24;
+
+            Console.WriteLine($"{c.age}, {d.age}");
+        }
+    }
+}
+
+튜플 :두개 이상의 데이터 요소가 포함된 간단한 데이터 구조
+//예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            (int, int) tuple1 = (110, 50);
+            Console.WriteLine($"{tuple1.Item1} , {tuple1.Item2}");
+        }
+    }
+}
+
+//예제 2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            (int Max, int Min) tuple1 = (110, 50);
+            Console.WriteLine($"{tuple1.Max} , {tuple1.Min}");
+        }
+    }
+}
+//예제 3
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            var tuple1 = (Max: 110, Min: 50);
+            Console.WriteLine($"{tuple1.Max} , {tuple1.Min}");
+        }
+    }
+}
+
+//예제 4
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            var tuple1 = ("슈퍼맨", 9999);
+            Console.WriteLine($"{tuple1.Item1} , {tuple1.Item2}");
+        }
+    }
+}
+
+//예제 5 튜플의 분해
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            var tuple1 = ("슈퍼맨", 9999,3.14);
+            Console.WriteLine($"{tuple1.Item1} , {tuple1.Item2} , {tuple1.Item3}");
+            var (name, age, power) = tuple1;
+            Console.WriteLine($"{name} {age} {power}");
+        }
+    }
+}
+
+//예제 6 튜플의 복사
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            var name1 = ("슈퍼맨", 1111);
+            var name2 = ("베트맨", 2222);
+            name1 = name2;
+            Console.WriteLine($"{name1.Item1},{name1.Item2}");
+            name1 = ("원더우먼", 3333);
+            Console.WriteLine($"{name1.Item1},{name1.Item2}");  
+        }
+    }
+}
+

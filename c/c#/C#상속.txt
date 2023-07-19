@@ -1,0 +1,215 @@
+상속과 다향성
+여러클래스들의 중복되는 부분을 하나의 클래스로 만들어서 필요로 하는 클래스들에게 배포하는것으로 중복을
+최소화함과 동시에 가독성과 재사용성을 향상시켜주는 방법
+//예시코드
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.Cache;
+using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
+
+namespace App4
+{   
+    internal class Program
+    {
+        class Animal
+        {
+            public int Age;
+            public Animal() { Age = 0; }
+            public void Eat()
+            {
+                Console.WriteLine("냠냠 먹습니다.");
+            }
+            public void Sleep()
+            {
+                Console.WriteLine("쿨쿨 잡니다.");
+            }
+        }
+        class Dog :  Animal
+        {
+            public string Color { get; set; }
+            public Dog() { Age = 0; }
+            public void Bark() { Console.WriteLine("왈왈 짓습니다."); }
+        }
+        class Cat:Animal
+        {
+            public string Color { get; set; }
+            public Cat() { Age = 0; }
+            public void Meow() { Console.WriteLine("냥냥 웁니다."); }
+        }
+        static void Main(string[] args)
+        {
+            List<Dog> dogs = new List<Dog>() { new Dog(), new Dog(), new Dog() };
+            List<Cat> cats = new List<Cat>() { new Cat(), new Cat() ,new Cat()};
+            int count = 0;
+            foreach (Dog dog in dogs)
+            {
+                count++;
+                dog.Eat();
+                dog.Sleep();
+                dog.Bark();
+            }
+            Console.WriteLine("Dogs 호출 반복횟수 :" + count);
+            count = 0;
+            foreach (Cat cat in cats)
+            {
+                count++;
+                cat.Eat();
+                cat.Sleep();
+                cat.Meow();
+            }
+            Console.WriteLine("Cats 호출 반복횟수 :" + count);
+        }
+    }
+}
+
+base키워드
+-부모를 나타내는 키워드
+-부모 클래스의 생성자,변수,메소드를 호출 할때 사용
+-this와 같이 부모의 멤버이름과 나의 멤버이름이 중복될 때 구분가능 단 this는 내멤버 base는 부모의 멤버
+-부모 클래스의 생성자는 상속이 되지 않기 때문에 자식클래스를 생성해도 부모가 만들어지지 않는다. 때문에 base를 통해
+호출및 생성한다
+-base.name(부모의 name멤버) / base() (부모의 생성자)
+//예시
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.Cache;
+using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
+
+namespace App4
+{
+    internal class Program
+    {
+        class parent
+        {
+            protected string name = "부모";
+        }
+        class child : parent
+        {
+            public string name = "자식";
+            public child() { 
+                Console.WriteLine("base.name = "+base.name);
+                Console.WriteLine("this.name = " + this.name);
+            }
+        }
+        static void Main(string[] args)
+        {
+           child a = new child();
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.Cache;
+using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
+
+namespace App4
+{
+    internal class Program
+    {
+        class Parent
+        {
+            public Parent()
+            {
+                Console.WriteLine("부모생성자");
+            }
+        }
+
+        class Child:Parent {
+            public Child():base() {
+                Console.WriteLine("자식생성자");
+            }
+        }
+        static void Main(string[] args)
+        {
+            Child a=    new Child();
+        }
+    }
+}
+//예제3
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net.Cache;
+using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
+
+namespace App4
+{
+    internal class Program
+    {
+        class A
+        {
+            int number;
+            protected string name = "Hello";
+            public A(int number)
+            {
+                this.number = number;
+            }
+            public void printA()
+            {
+                Console.WriteLine("Parent no : " + number);
+            }
+        }
+        class B : A
+        {
+            string name = "World";
+            public B(int number) : base(number) { }
+            public void printB()
+            {
+                Console.WriteLine(base.name +" "+name);
+            }
+        }
+        static void Main(string[] args)
+        {
+            B test = new B(3);
+            test.printA();
+            test.printB();
+        }
+    }
+}
+
+오버라이딩 : 오버라이딩하면 클래스형을 어떻게 변환해도 자식에서 다시 정의한 메서드를 호출하게 됨
+오버로딩 : 같은 이름의 메소드를 다른 반환형과 다른 매개변수 갯수/타입을 가지게 하여 하나의 함수이름으로 
+다양한 함수를 사용하는것과 같은 효과를 냄
+
+is , as 키워드
+is 키워드
+-특정 객체의 클래스 확인
+-객체가 해당 형식에 해당하는지 검사하여 그결과를 bool값으로 반환
+-타입을 맞추면 true반환
+//예시
+Normal normal = new Dog();
+Dog dog;
+if(normal is Dog){
+dog=(Dog)normal;
+dog.Bark();
+}
+as 키워드
+is와 같이 객체타입을 비교하는 연산이지만 맞으면 객체를 틀리면 null을 반환
+//예시
+Mammal mammal =new Dog();
+Mammal mammal =new Cat();
+
+Dog dog;
+if(mammal is Dog){
+dog=(Dog)mammal;
+dog.Bark();
+}
+
+Cat cat = mammal2 as Cat;
+if(cat != null)
+cat.Meow();
+
+Cat cat2 = mammal as Cat;
+if(cat2 != null)
+cat.Meow();
+else
+Console.WriteLine("cat2 is null");
+

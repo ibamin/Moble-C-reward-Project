@@ -1,0 +1,15 @@
+C:\MyMoble\c#\Hellow\Hellow\bin\Debug\net6.0\Hellow.exe
+C:\MyMoble\c#\Hellow\Hellow\bin\Debug\net6.0\Hellow.deps.json
+C:\MyMoble\c#\Hellow\Hellow\bin\Debug\net6.0\Hellow.runtimeconfig.json
+C:\MyMoble\c#\Hellow\Hellow\bin\Debug\net6.0\Hellow.dll
+C:\MyMoble\c#\Hellow\Hellow\bin\Debug\net6.0\Hellow.pdb
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.csproj.AssemblyReference.cache
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.GeneratedMSBuildEditorConfig.editorconfig
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.AssemblyInfoInputs.cache
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.AssemblyInfo.cs
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.csproj.CoreCompileInputs.cache
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.dll
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\refint\Hellow.dll
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.pdb
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\Hellow.genruntimeconfig.cache
+C:\MyMoble\c#\Hellow\Hellow\obj\Debug\net6.0\ref\Hellow.dll

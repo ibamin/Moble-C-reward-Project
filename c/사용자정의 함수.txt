@@ -1,0 +1,73 @@
+함수의 종류
+-라이브러리 함수 : 패키징/모듈 등으로 이미 만들어져있는 open source
+-사용자정의함수 : 개발자가 개인의 필요에 의해 만든 함수
+
+사용자정의 함수 틀
+반환형 함수이름 (매개변수)
+{
+
+}
+반환형에 들어갈 수 있는 것 : 반환형 / void(empty) 반환될 값의 자료형
+매개변수에 들어갈 수 있는 것 : 변수의 자료형(int x와 같은 형태) / void(empty)
+함수 이름를 지정할 때 주의해야할 것
+1. 예약어
+2. 숫자가 맨앞에 있는 이름
+3. 특수기호가 들어있는 이름
+
+함수 틀의 경우의 수
+1 반환형 : 0 매개변수 : 0
+ex) 두개의 정수를 전달 받아 더해서 반환하는 함수
+int sum(int a,int b){
+return a+b;
+}
+
+int main(){
+int x,y;
+printf("두개의 정수 입력 : ");
+scanf("%d %d",&x,&y);
+
+분기 (printf로 바로 출력하거나 결과변수를 만든뒤 변수에 함수반환값을 저장하는 2가지의 방법중 선택)
+int result = add(x,y);
+printf("%d",result);
+}
+
+2 반환형 : 0 매개변수 : X (변수의 초기화값을 이력받아 반환하는 함수를 만들때 사용됨)
+int get_int(){
+  int x;
+printf("정수 한개 입력 : ");
+scanf("%d",&x);
+return x;
+}
+
+int main(){
+int x,y;
+x=get_int(); //x를 get_int라는 함수를 통해 초기화
+y=get_int();
+printf("%d",x+y);
+}
+
+3 반환형 :X 매개변수 : 0
+두개의 정수를 전달 받아 합을 구하고 출력하는 함수 제작 예시
+void sum (int x,int y){
+printf("%d + %d = %d",x,y,x+y);
+}
+
+int main(){
+int x,y;
+printf("두개 정수 입력 : " );
+scanf("%d %d",&x,&y);
+sum(x,y);
+}
+
+4 반환형 : X 매개변수 : X
+void print(){
+printf("====================================\n");
+}
+
+int main(){
+int x,y;
+x=get_int();
+print();
+y=get_int();
+print();
+}

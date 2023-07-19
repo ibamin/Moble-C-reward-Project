@@ -1,0 +1,442 @@
+구조체
+구조체와 클래스 선언
+공통점
+1. static이 없는 멤버는 초기화 불가능
+2. 대입연산자가 된다
+
+차이점
+1.구조체는 생성자가 필요없지만 클래스는 생성자가 필요하다.
+2.구조체는 문자열 멤버를 null로 초기화해야한다 클래스는 문자열 멤버 초기화 할 필요가 없다
+3.구조체는 값형식이라 대입으로 복사가 되고 클래스는 참조 형식은 참조가된다
+생성자 와 소멸자
+구조체는 값형식 클래스는 참조 형식
+클래스를 생성하는 생성자는 매개변수 default생성자를 반드시 생성해야한다
+//예시 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App4
+{
+    internal class Cat
+    {
+        public string Name;
+        public string Color;
+        public Cat() { Name = "나메"; Color = "파랑색"; }
+        public Cat(string name,string color) { Name = name;  Color = color; }
+        public void meow()
+        {
+            Console.WriteLine("야옹");
+        }
+    }
+}
+
+using System;
+
+namespace App4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Cat kitty = new Cat();
+            kitty.Name = "키티";
+            kitty.Color = "하얀색";
+            Console.WriteLine($"{kitty.Name} : {kitty.Color}");
+            Cat nabi = new Cat("나비","갈색");
+            Console.WriteLine($"{nabi.Name} : {nabi.Color}");
+        }
+    }
+}
+//예제 2
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App4
+{
+    internal class Farm
+    {
+        public static int counter =0; //주요하게 봐야할것
+        public int id;
+        public string name;
+        public int price;
+
+        public Farm() {
+            id=0; name = "Nan"; price = 0;
+        }
+        public Farm(string name,int price)
+        {
+            Farm.counter++;
+            this.id = counter;
+            this.name = name;
+            this.price = price;
+        }
+    }
+}
+
+using System;
+
+namespace App4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Farm a = new Farm("감자",2000);
+            Farm b = new Farm("고구마", 3000);
+
+            Console.WriteLine($"{a.id} : {a.name} {a.price}");
+            Console.WriteLine($"{b.id} : {b.name} {b.price}");
+            Console.WriteLine(Farm.counter + "개 생성되었습니다");
+        }
+    }
+}
+
+소멸자 
+이름 앞에 ~가붙음
+접근 제한자/반환/매개변수/오버로딩 불가능
+garbage collector가 자동으로 치워줌
+안쓰게 좋음 쓰면 성능저하만 일어날 가능성 높음
+안써도 자동으로 생기고 처리는 garbage collector가 하기때문에 오히려 만들어서 접근하는게 손해다
+
+정적 멤버와 인스턴스 멤버
+static 멤버 (클래스 변수)
+메서드 내에서 instance 멤버 사용불가 static 변수만 사용가능
+instance 멤버
+접근제한자가 붙은 일반 변수
+//예제
+using System;
+
+namespace App4
+{
+    class global
+    {
+        public static int count = 0;
+    }
+    class A
+    {
+       public A() { global.count++;  }
+    }
+
+    class B
+    {
+        public B() { global.count++; }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("현재 클래스 숫자 :"+global.count);
+            new A();
+            Console.WriteLine("현재 클래스 숫자 :" + global.count);
+            new B();
+            Console.WriteLine("현재 클래스 숫자 :" + global.count);
+            new A();
+            Console.WriteLine("현재 클래스 숫자 :" + global.count);
+            new B();
+            Console.WriteLine("현재 클래스 숫자 :" + global.count);
+
+        }
+    }
+}
+
+this 키워드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace App4
+{
+    internal class THIS
+    {
+        int a, b, c;
+        public THIS()
+        {
+            this.a = 5425;
+            Console.WriteLine("MyTHIS");
+        }
+        public THIS(int b) : this()
+        {
+            this.b = b;
+            Console.WriteLine("MyTHIS" + b);
+        }
+        public THIS(int b,int c) : this(b)
+        {
+            this.c = c;
+            Console.WriteLine("THIS :"+b+", "+c);
+        }
+        public void printfield()
+        {
+            Console.WriteLine("a:"+a+ "b:"+b + "c:"+c);
+        }
+    }
+}
+
+internal class Program
+    {
+        static void Main(string[] args)
+        {
+            THIS a = new THIS();
+            a.printfield();
+            Console.WriteLine();
+
+            THIS b= new THIS(1);
+            b.printfield();
+            Console.WriteLine();
+
+            THIS c= new THIS(10,20);
+            c.printfield();
+
+        }
+
+Rand : C와는 다르게 클래스로 이루어져 있어 c에서의 srand(time(null))과같은 난수 초기화가 필요없다
+//예제
+internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random r = new Random();
+            for(int i = 0; i < 5; i++)
+            {
+                double r1 = Math.Round(r.NextDouble()*10);
+                Console.WriteLine(r1);
+            }
+        }
+    }
+
+List : 배열과 유사하지만 동적 배열 선언이 번거롭기 때문에 주로 사용됨
+//예제
+static void Main(string[] args)
+        {
+            List<int> list = new List<int>();
+            list.Add(57);
+            list.Add(273);
+            list.Add(32);
+            list.Add(64);
+
+            foreach(var item in list)
+            {
+                Console.WriteLine("count"+list.Count+"\t item"+item);
+            }
+        }
+
+//예제 2
+static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            List<int> list = new List<int>();
+            for(int i=0;i<10; i++)
+            {
+                int x = rnd.Next(1, 101);
+                list.Add(x);
+            }
+            int j = 1;
+            foreach(var item in list)
+            {
+
+                Console.WriteLine("count"+j+"\t item"+item);
+                j++;
+            }
+}
+//예제 3
+static void Main(string[] args)
+        {
+            List<string> rivers = new List<string>(new string[]
+            {
+                "signals","math","express","electro","photonics"
+            });
+            List<string> range = rivers.GetRange(0, 3);
+            foreach (string river in range)
+            {
+                Console.WriteLine(river);
+            }
+            
+        }
+//예제4
+ static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            List<string> rivers = new List<string>(new string[]
+            {
+                "signals","math","express","electro","photonics"
+            });
+            int x = rnd.Next(0, 5);
+            int y = rnd.Next(x, 5);
+            List<string> range = rivers.GetRange(x, y);
+            foreach (string river in range)
+            {
+                Console.WriteLine(river);
+            }
+            
+        }
+    }
+//예제5
+static void Main(string[] args)
+        {
+            Random rnd = new Random();
+            List<int> list = new List<int>() { 52, 273, 32, 64,50,46 };
+            int x = rnd.Next(0, 6);
+ 
+            list.Remove(list[x]);
+            foreach (int river in list)
+            {
+                Console.WriteLine(river);
+            }
+            
+        }
+
+Math
+//예제1
+ static void Main(string[] args)
+        {
+          double x= double.Parse(Console.ReadLine());
+            double y= double.Parse(Console.ReadLine());
+            Console.WriteLine("ABS:"+Math.Abs(x));
+            Console.WriteLine("Ceiling:"+Math.Ceiling(x));
+            Console.WriteLine("Floor:"+Math.Floor(x));
+            Console.WriteLine("Mat:"+Math.Max(x,y));
+            Console.WriteLine("Min:"+Math.Min(x,y));
+            Console.WriteLine("Round :"+Math.Round(x));
+        }
+
+Test
+//test1
+namespace App4
+{
+    class robot
+    {
+        static string name;
+        int mineral;
+        int diffusion;
+        int life;
+        int attack;
+        public static int count = 0;
+
+        public robot()
+        {
+            name = "건설 로봇"; mineral = 50; diffusion = 1;
+            life = 45; attack = 5;
+            count++;
+        }
+        public robot(int mineral, int diffusion, int life, int attack)
+        {
+            this.mineral = mineral;
+            this.diffusion = diffusion;
+            this.life = life;
+            this.attack = attack;
+            count++;
+        }
+
+        public  int Mineral
+        {
+            get { return mineral; }
+            set { mineral= value; }
+        }
+        public int Diffusion
+        {
+            get { return diffusion; }
+            set { diffusion = value; }
+        }
+        public int Life
+        {
+            get { return life; }
+            set { life = value; }
+        }
+        public int Attack
+        {
+            get { return attack; }
+            set { attack = value; }
+        }
+        public void show()
+        {
+            Console.WriteLine("Name :" + name);
+            Console.WriteLine("Mineral :" + mineral);
+            Console.WriteLine("Supply :" + diffusion);
+            Console.WriteLine("HP :" + life);
+            Console.WriteLine("Attack :" + attack);
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int money, supply;
+            while (true)
+            {
+                Console.Write("지불할 금액 :");
+                money = int.Parse(Console.ReadLine());
+                Console.Write("남은 보급자원 :");
+                supply = int.Parse(Console.ReadLine());
+                if (money >= 50 && supply >= 1)
+                {
+                    robot a = new robot();
+                    a.show();
+                    Console.WriteLine("현재 건설로봇 수 :" + robot.count);
+                }
+                else
+                {
+                    Console.WriteLine("돈이나 자원이 부족합니다.");
+                }
+            }
+
+        }
+    }
+}
+
+Test2
+//test2
+internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Random rand = new Random();
+            int x=rand.Next(1,51);
+            int input;
+            while (true)
+            {
+                Console.Write("숫자를 입력하세요>>");
+                input=int.Parse(Console.ReadLine());
+                if(input==x)
+                {
+                    Console.WriteLine("정답입니다");
+                    break;
+                }
+                if (input > x) Console.WriteLine("입력이 더 큽니다");
+                if (input < x) Console.WriteLine("정답이 더 큽니다");
+            }
+        }
+    }
+
+//test3
+class student
+    {
+        public string name;
+        public int grade;
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            List<student> list = new List<student>();
+            list.Add(new student() { name = "윤인성", grade = 1 });
+            list.Add(new student() { name = "연하진", grade = 2 });
+            list.Add(new student() { name = "윤아린", grade = 3 });
+            list.Add(new student() { name = "윤명월", grade = 4 });
+            list.Add(new student() { name = "구지연", grade = 1 });
+            list.Add(new student() { name = "김연화", grade = 2 });
+
+            for(int i=list.Count-1; i>=0; i--)
+            {
+                if (list[i].grade>1)
+                list.RemoveAt(i);
+            }
+            for(int i=0;i<list.Count; i++) Console.WriteLine(list[i].name + ' ' + list[i].grade);
+        }
+    }

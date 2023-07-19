@@ -1,0 +1,297 @@
+구조체 : 함수 밖에 선언 필요의해 묶인 자료형들은 구조체의 이름으로 하나의 자료형이 된다
+& * = 연산가능
+구조체를 함수의 매개변수로 전달할때 이때의 연산은 a[]와 같은 배열과는 다르게 구조체이름또한 포인터로 연산됨에도
+call by value연산이 되기에 포인터를 붙여줘서 연산을 진행해야 원본에 영향을 줄 수 있다
+예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct student {
+	int number;
+	char name[10];
+	double grade;
+};
+
+void print(struct student s) {
+	printf("학번 : %d\n", s.number);
+	printf("이름 : %s\n", s.name);
+	printf("학점 : %lf\n", s.grade);
+	printf("구조체 사이즈 : %u\n", sizeof(s));
+	printf("구조체 학번 : %u\n", &s.number);
+	printf("구조체 이름 : %u\n", &s.name);
+	printf("구조체 학점 :%u\n", &s.grade);
+}
+
+int main() {
+	struct student s[3];
+
+	for (int i = 0; i < 3; i++) 
+		scanf("%d %s %lf", &s[i].number,&s[i].name, &s[i].grade);
+
+	for (int i = 0; i < 3; i++)
+		print(s[i]);
+}
+//예제 2
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct point {
+	int x;
+	int y;
+};
+
+double check(struct point a, struct point b) {
+	int x, y;
+	x = a.x > b.x ? a.x - b.x : b.x - a.x;
+	y = a.y > b.y ? a.y - b.y : b.y - a.y;
+	return sqrt((double)(x * x + y * y));
+}
+
+int main() {
+	struct point a[2];
+	for (int i = 0; i < 2; i++) {
+		printf("%d번째 점:", i + 1);
+		scanf("%d %d", &a[i].x, &a[i].y);
+	}
+	printf("두점사이의 거리 : %lf", check(a[0], a[1]));
+}
+//예제3
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct point {
+	int x;
+	int y;
+};
+
+struct ract {
+	struct point p1;
+	struct point p2;
+};
+
+void input(struct point* p) {
+	printf("좌표 입력:");
+	scanf("%d %d", &p->x, &p->y);
+}
+
+void getract(struct ract *r) {
+	input(&(r->p1)); 
+	input(&(r->p2));
+}
+
+int getarea(struct ract r) {
+	int x = r.p1.x > r.p2.x ? r.p1.x - r.p2.x : r.p2.x - r.p1.x;
+	int y = r.p1.y > r.p2.y ? r.p1.y - r.p2.y : r.p2.y - r.p1.y;
+	return x * y;
+}
+
+int main() {
+	struct ract r;
+	getract(&r);
+	printf("사각형의 넓이 :%d", getarea(r));
+}
+//예제4
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct point {
+	int x;
+	int y;
+};
+
+void print(struct point p) {
+	printf("%d %d\n", p.x, p.y);
+}
+
+int main() {
+	struct point p1 = { 10,20 };
+	struct point p2 = { 30,40 };
+	print(p1);
+	print(p2);
+	p2 = p1;
+	printf("대입 연산 적용\n");
+	print(p1);
+	print(p2);
+
+	//if(p1 == p2) printf("p1과 p2가 같습니다");
+	
+	if((p1.x==p2.x) && (p1.y==p2.y)) printf("p1과 p2가 같습니다");
+}
+//->예제5
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct student {
+	int number;
+	char name[10];
+	double grade;
+};
+
+void print(struct student s) {
+	printf("학번 : %d\n", s.number);
+	printf("이름 : %s\n", s.name);
+	printf("학점 : %lf\n", s.grade);
+	printf("구조체 사이즈 : %u\n", sizeof(s));
+	printf("구조체 학번 : %u\n", &s.number);
+	printf("구조체 이름 : %u\n", &s.name);
+	printf("구조체 학점 :%u\n", &s.grade);
+}
+
+int main() {
+	struct student s = { 20070001,"홍길동",4.3 };
+	struct student* p;
+
+	p = &s;
+
+	
+	printf("학번=%d 이름=%s 학점=%f\n",s.number,s.name,s.grade);
+	printf("학번=%d 이름=%s 학점=%f\n",(*p).number, (*p).name, (*p).grade);
+	printf("학번=%d 이름=%s 학점=%f\n",p->number,p->name,p->grade);
+}
+
+//예제6
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct perinfo {
+	char addr[30];
+	char tel[20];
+};
+
+struct person {
+	char name[20];
+	char pID[20];
+	struct perinfo* info;
+};
+
+int main() {
+	struct perinfo info = { "korea seoul","333-4444" };
+	struct person man = { "Mr.Lee","820204-xxxx512" };
+	man.info = &info;
+
+	printf("name:%s\n",man.name);
+	printf("pID:%s\n",man.pID);
+	printf("addr:%s\n",man.info->addr);
+	printf("tel:%s\n",man.info->tel);
+}
+
+공용체
+같은 메모리 영역을 여러 개의 변수가 공유
+공용체를 선언하는 방법은 구조체와 유사함
+union [공용체명]{
+변수
+변수
+변수
+.
+}
+//예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+struct student {
+	int type;
+	union {
+		int std_number;
+		char reg_number[15];
+	}id;
+	char name[20];
+};
+
+void print(struct student s) {
+	switch (s.type) {
+	case 1:
+		printf("학번 : %d \n이름 : %s\n", s.id.std_number, s.name);
+		break;
+	case 2:
+		printf("주민등록 번호 : %s\n이름 : %s\n", s.id.reg_number, s.name);
+		break;
+	default:
+		printf("오류");
+	}
+}
+int main() {
+	struct student s1, s2;
+	s1.type = 1;
+	s1.id.std_number = 20190001;
+	strcpy(s1.name, "홍길동");
+
+	s2.type = 2;
+	strcpy(s2.id.reg_number, "860101-1056076");
+	strcpy(s2.name, "김철수");
+
+	print(s1);
+	print(s2);
+}
+
+typedef : 사용할 변수의 자료형을 줄여주기 위해 사용하는 예약어
+typedef long long ll 
+//예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <string.h>
+#include <math.h>
+#define size 5
+
+typedef long long ll;
+
+typedef struct point {
+	int x;
+	int y;
+}POINT;
+
+POINT translate(POINT p, POINT delta)
+{
+	POINT new_p;
+	new_p.x = p.x + delta.x;
+	new_p.y = p.y + delta.y;
+	return new_p;
+}
+
+int main() {
+	POINT p = { 2,3 };
+	POINT delta = { 10,10 };
+	POINT result;
+
+	result = translate(p, delta);
+	printf("새로운 점의 좌표는 (%d,%d)입니다\n", result.x, result.y);
+
+}
+
+

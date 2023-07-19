@@ -1,0 +1,255 @@
+포인터 연산을 통한 배열 요소의 접근
+예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+int main() {
+	int arr[5] = { 1,2,3,4,5 };
+
+	int* parr = arr;
+	printf("arr의 주소 : %u\n", arr);
+	printf("parr의 주소 : %u\n", parr);
+
+	printf("%d\n",*parr);
+	printf("%d\n",*(++parr));
+	printf("%d\n",*(++parr));
+	printf("parr의 주소 : %u\n",parr);
+
+	printf("%d\n",*(parr+1));
+	printf("%d\n",*(parr+2));
+	printf("parr의 주소 :%u\n",parr);
+}
+
+//포인터 연산을 통한 배열 요소접근 함수편
+예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 3
+
+double getSensorData(double *p) {
+	srand(time(NULL));
+	for (int i = 0; i < size; i++) p[i] = rand() % 100;
+}
+
+int main() {
+	double sensorData[size];
+	getSensorData(sensorData);
+
+	for (int i = 0; i < size; i++) printf("%d센서와 장애물과의 거리 : %lf\n", i + 1, sensorData[i]);
+}
+
+
+포인터의 활용
+지금까지 본것 : 포인터가 주소값을 가리키는것 / 포인터가 배열의 이름을 가르키는것
+더블 포인터
+예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 5
+
+int main() {
+	int i = 100;
+	int* p = &i;
+	int** q = &p;
+	*p = 200;
+	printf("i=%d  *p=%d **p=%d\n", i, *p, **q);
+
+	**q = 300;
+	printf("i=%d  *p=%d **p=%d\n", i, *p, **q);
+
+	printf("주소값 i=%u p=%u\n", &i, p);
+	printf("주소값 p=%u q=%u\n", &p, q);
+	printf("주소값 p=%u\n",p);
+}
+
+포인터 배열
+//예시코드
+int main() {
+	int n;
+	char *fruits[] = {
+		"apple",
+		"blueberry",
+		"orange",
+		"meton"
+	};
+	n = sizeof(fruits) / sizeof(fruits[0]);
+
+	for (int i = 0; i < n; i++) printf("%s\n", fruits[i]);
+}
+배열 포인터
+잘안쓰임
+
+함수포인터
+포인터 상수 : 문자열 배열이름 함수이름
+반환형과 매개변수가 동일해야 함수포인터가 될 수 있다.
+예시
+int fct1(int a)
+int (*fct)(int)
+
+[반환형] [함수이름] [매개변수]
+함수이름은 함수의 주소값을 가지고 있음
+
+int arr(int x,int y,int z)
+int (*parr)(int,int,int)
+//예시코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 5
+
+int add(int, int);
+int sub(int, int);
+
+int main() {
+	int result;
+	int (*pf)(int, int);
+
+	pf = add;
+	result = pf(10, 20);
+	printf("10+20은 %d\n", result);
+	printf("pf의 주소=%#x\n",pf);
+	printf("add의 주소=%#x\n", add);
+	pf = sub;
+	result = pf(10, 20);
+	printf("10-20은%d\n", result);
+}
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int sub(int a, int b) {
+	return a - b;
+}
+
+함수 포인터 배열
+//예시 코드
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 5
+
+int add(int a, int b) {
+	return a + b;
+}
+
+int sub(int a, int b) {
+	return a - b;
+}
+
+int mul(int a, int b) {
+	return a * b;
+}
+
+int div1(int a, int b) {
+	return a / b;
+}
+
+void menu() {
+	printf("=====================\n");
+	printf("0. 덧셈\n");
+	printf("1. 뺄셈\n");
+	printf("2. 곱셈\n");
+	printf("3. 나눗셈\n");
+	printf("4. 종료\n");
+	printf("=====================\n");
+}
+
+int main() {
+	int ch, result, x, y;
+	int (*pf[4])(int, int) = { add,sub,mul,div1 };
+	for (int i = 0; i < 4; i++) {
+		printf("%d함수의 주소값:%u\n",i+1,pf[i]);
+	}
+
+	while (1) {
+		menu();
+		printf("메뉴를 선택하시오:");
+		scanf("%d", &ch);
+
+		if (ch < 0 || ch >= 4) break;
+		printf("2개의 정수를 입력하시오.");
+		scanf("%d %d", &x, &y);
+		printf("연산결과 = %d\n", pf[ch](x, y));
+	}
+}
+//예제 2
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 5
+
+double f1(double k);
+double f2(double k);
+double formula(double(*pf)(double), int n);
+
+int main() {
+	printf("%lf\n", formula(f1, 10));
+	printf("%lf\n", formula(f2, 10));
+}
+
+double formula(double(*pf)(double), int n) {
+	int i;
+	double sum = 0;
+	for (i = 0; i < n; i++)
+		sum += pf(i) * pf(i) + pf(i) + 1;
+	return sum;
+}
+
+double f1(double k) {
+	return 1 / k;
+}
+
+double f2(double k) {
+	return cos(k);
+}
+void 포인터 : 주소값만 가지고 있는 포인터 형변환 등의 작업은 활용불가능 하지만 
+어떤타입의 포인터도 받을 수 있는 함수를 작성할 수 있다.
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+#define size 5
+
+void memzero(void* ptr, size_t len) {
+	char* p = (char*)ptr;
+	for (; len > 0; len--)
+		*p++ = 0;
+}
+
+int main
+() {
+	char a[10];
+	memzero(a, sizeof(a));
+	for (int i = 0; i < 10; i++)
+		printf("%d ", a[i]);
+	printf("\n");
+
+	int b[10];
+	memzero(b, sizeof(b));
+	for (int i = 0; i < 10; i++)
+		printf("%d ", b[i]);
+	printf("\n");
+
+	double c[10];
+	memzero(c, sizeof(c));
+	for (int i = 0; i < 10; i++)
+		printf("%.0lf ", c[i]);
+}
+

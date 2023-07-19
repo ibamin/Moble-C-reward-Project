@@ -1,0 +1,286 @@
+헤더
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+배열
+//예제1
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 52, 273, 32, 65, 109 };
+
+            Console.WriteLine("요소값 변경 전");
+            Console.WriteLine(arr[0]);
+            Console.WriteLine(arr[1]);
+            Console.WriteLine(arr[2]);
+            Console.WriteLine(arr[3]);
+            Console.WriteLine(arr[4]);
+
+            arr[0] = 0;
+            Console.WriteLine();
+
+            Console.WriteLine("요소값 변경 후");
+            Console.WriteLine(arr[0]);
+            Console.WriteLine(arr[1]);
+            Console.WriteLine(arr[2]);
+            Console.WriteLine(arr[3]);
+            Console.WriteLine(arr[4]);
+        }
+    }
+}
+//예제2
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 52, 273, 32, 65, 109 };
+            int sum = 0;
+
+            for(int i=0;i<5; i++)
+                Console.Write(arr[i]);
+            Console.WriteLine();
+            for(int i = 0; i < arr.Length; i++)
+            {
+                Console.Write(arr[i] );
+                sum += arr[i];
+            }
+            Console.WriteLine(sum);
+
+            foreach(int i in arr)
+            {
+                Console.Write(i);
+                sum += i;
+            }
+            Console.WriteLine(sum);
+        }
+    }
+}
+//예제 3
+int[] arr = new int[100];
+ Console.WriteLine(arr[0]);
+Console.WriteLine(arr[99]);
+
+다차원 배열
+//예제 1
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[,] arr = new int[2, 2];
+            arr[0,0] = 1;
+            arr[0,1] = 2;
+            arr[1,0] = 3;
+            arr[1,1] = 4;
+            for(int i=0; i < 2; i++) {
+                for(int j=0; j < 2; j++)
+                {
+                    Console.Write(arr[i,j]);
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}
+//예제2
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[,] arr = { { 1, 2 }, { 3, 4 } };
+            for(int i=0;i<2;i++)
+            {
+                for(int j=0;j<2;j++)
+                    Console.Write(arr[i,j]+" ");
+                Console.WriteLine();
+            }
+            
+        }
+    }
+}
+//예제3
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            string[,,] arr = { { { "ab", "cd" }, { "ef", "gh" } }, { { "ij", "kl" }, { "mn", "op" } } };
+            for(int i=0;i<2;i++)
+            {
+                for(int j = 0; j < 2; j++)
+                {
+                    for(int k=0; k < 2; k++)
+                        Console.WriteLine(arr[i,j,k]);
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+가변 배열 (동적 배열)
+모양은 c의 2차원 배열과 같지만 다른의미이다
+2차원 배열은 [ ,] 3차원 [,,]이런 식의 표현이 2차 3차 배열 표현이다
+//예제1
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[][] arr = new int[2][];
+            arr[0] = new int[3] { 1, 2, 3 };
+            arr[1] = new int[2] { 4, 5 };
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                for (int j = 0; j < arr[i].Length; j++)
+                    Console.Write(arr[i][j]);
+                Console.WriteLine();
+            }
+        }
+    }
+}
+
+배열 메소드
+static 메소드 : sort / binarysearch / indexof / resize / clear
+//예제
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[] scores = new int[] { 80, 74, 81, 90, 34 };
+            foreach (int i in scores)
+                Console.Write($"{i} ");
+            Console.WriteLine();
+
+            Array.Sort( scores );
+            foreach (int i in scores)
+                Console.Write($"{i} ");
+            Console.WriteLine();
+
+            Console.WriteLine("Number of dimensions : {0}", scores.Rank) ;
+            Console.WriteLine("Binary Search : 81 is ar {0}",Array.BinarySearch(scores,90));
+            Console.WriteLine("Old length of scores : {0}",scores.GetLength(0));
+            Array.Resize<int>(ref scores, 10); //ref는 참조형 변수로 사용하는 키워드 , 배열의 크기를 resize에 의해 재정의
+            Console.WriteLine("New length of scores : {0}", scores.Length);
+        }
+    }
+}
+
+클래스
+접근한정자 : 멤버 변수 및 메소드를 외부에서 접근할 수 있는 접근구너한 설정
+defualt : private : 클래스 내부에서만 접근가능
+protected : 상속받은 자식이거나 클래스 내부에서만 접근 가능
+internal : 같은 프로젝트내에 클래스에서 public수준으로 접근가능하고 다른 프로젝트에서의 접근을 private로 막음
+public : Anybody 누구나 접근가능
+//예제
+namespace _0711
+{
+    class WaterHeater
+    {
+        protected int tmp;
+        public void settmp(int tmp)
+        {
+            if (tmp < 10 || tmp > 42)
+            {
+                Console.WriteLine("10~42도 사이의 온도값을 입력하세요.");
+                Console.WriteLine("물의 온도는 15도로 리셋됩니다.");
+            }
+            this.tmp = tmp;
+        }
+        public void turnOnWater()
+        {
+            Console.WriteLine($"Turn on water : {tmp}");
+        }
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            WaterHeater a = new WaterHeater();
+            a.settmp(20);
+            a.turnOnWater();
+
+            a.settmp(10);
+            a.turnOnWater();
+
+            a.settmp(50);
+            a.turnOnWater();
+        }
+    }
+}
+//예제2
+namespace App4
+{
+    internal class Box
+    {
+        private int width;
+        private int height;
+
+        public Box(int width, int height)
+        {
+            Width = width;
+            Height = height;
+        }
+        public int Width { get { return width; } 
+            set {
+                if (value < 0)
+                    Console.WriteLine("너비입력은 자연수만");
+                else
+                width = value; } }
+        public int Height { get { return height; } set
+            {
+                if (value < 0)
+                    Console.WriteLine("높이입력은 자연수만");
+                else
+                    height = value;
+            } }
+        public int area()
+        {
+            return width * height;
+        }
+    }
+}
+
+
+namespace App4
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            int x=int.Parse(Console.ReadLine());
+            int y=int.Parse(Console.ReadLine());
+            Box box = new Box(x, y);
+
+            box.Width = -20;
+            box.Height = -20;
+
+            Console.WriteLine(box.ToString());
+            Console.WriteLine(box.area());
+
+        }
+    }
+}
+
+
+

@@ -1,0 +1,829 @@
+열거형
+//예시코드
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    enum DialogResult1 { YES,NO,CANCEL }
+    enum DialogResult2 { YES=10,NO,CANCEL }
+    enum DialogResult3 { YES=10,NO,CANCEL,CONFIRM=20,OK };
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine((int)DialogResult1.YES);
+            DialogResult1 result = DialogResult1.YES;
+            Console.WriteLine(result==DialogResult1.YES);
+
+            Console.WriteLine((int) DialogResult3.YES);
+            Console.WriteLine((int)DialogResult3.NO);
+            Console.WriteLine((int)DialogResult3.CANCEL);
+            Console.WriteLine((int)DialogResult3.CONFIRM);
+            Console.WriteLine((int)DialogResult3.OK);
+        }
+    }
+}
+
+//예시2
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { 1, 2, 3 };
+            int[] parr;
+            parr = arr;
+            parr[1] = 20;
+            Console.WriteLine($"arr[0]={arr[0]} arr[1]={arr[1]} arr[2]={arr[2]}");
+            Console.WriteLine($"parr[0]={parr[0]} parr[1]={parr[1]} parr[2]={parr[2]}");
+        }
+    }
+}
+
+//예시3 키정보
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            ConsoleKeyInfo Keyinfo;
+            do
+            {
+                Keyinfo = Console.ReadKey();
+                if (Keyinfo.Key == ConsoleKey.A)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("A가 눌렸습니다.");
+                }
+                if (Keyinfo.KeyChar == 'c')
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("c가 눌렸습니다.");
+                }
+            } while (Keyinfo.Key != ConsoleKey.Escape);
+        }
+    }
+}
+
+//예시4 입력을 정수 및 다른 형태로 활용하는법
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("문자열을 입력받으시오.");
+            string input = Console.ReadLine();
+            Console.WriteLine("input:" + input);
+
+            int intinput = int.Parse(input);
+            Console.WriteLine(intinput+1);
+        }
+    }
+}
+
+//예제5 Test
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    public struct grade
+    {
+        public int korean;
+        public int English;
+        public int math;
+        public int sum;
+        public double avg;
+        public double grade_avg()
+        {
+            avg = sum / 3.0;
+            return avg;
+        }
+        public int grade_sum() {
+            sum = korean + English + math;
+            return sum;
+        }
+        public void show()
+        {
+            Console.WriteLine($"국어: {korean} 영어:{English} 수학:{math}");
+        }
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            grade moble = new grade();
+            string input;
+            Console.Write("국어점수 >");
+            moble.korean = int.Parse(Console.ReadLine());
+            Console.Write("영어점수 >");
+            moble.English = int.Parse(Console.ReadLine());
+            Console.Write("수학점수 >");
+            moble.math = int.Parse(Console.ReadLine());
+            moble.show();
+            Console.Write("총점 : "+ moble.grade_sum()+',');
+            Console.WriteLine($"평균 : {moble.grade_avg():f1}");
+        }
+    }
+}
+
+연산자 : c하고 같음
+//예제 1
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine(4 % 3);
+            Console.WriteLine(-4 % 3);
+            Console.WriteLine(4 % -3);
+            Console.WriteLine(-4 % -3);
+        }
+    }
+}
+//예제 2
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+           int a=9,b=10;
+
+            Console.WriteLine($"{a} & {b}: {a & b}");
+            Console.WriteLine($"{a} | {b}: {a | b}");
+            Console.WriteLine($"{a} ^ {b}: {a ^ b}");
+            int c = 255;
+            Console.WriteLine($"~{c}(0x{c:x8}):{~c}(0x{~c:x8})");
+        }
+    }
+}
+
+//예제 3
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Testing << ...");
+
+            int a = 1;
+            Console.WriteLine($"a   :{a:d5} (0x{a:x8})");
+            Console.WriteLine("a<<1:{0:d5} (0x{0:x8})", a<<1);
+            Console.WriteLine("a<<2:{0:d5} (0x{0:x8})", a<<2);
+            Console.WriteLine("a<<5:{0:d5} (0x{0:x8})", a<<5);
+
+            a = 255;
+            Console.WriteLine($"a   :{a:d5} (0x{a:x8})", a);
+            Console.WriteLine("a<<1:{0:d5} (0x{0:x8})", a << 1);
+            Console.WriteLine("a<<2:{0:d5} (0x{0:x8})", a << 2);
+            Console.WriteLine("a<<5:{0:d5} (0x{0:x8})", a << 5);
+        }
+    }
+}
+
+//예제4 null연산
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            foo a = null;
+            int? bar;
+            bar = a?.Id;
+            Console.WriteLine(bar);
+        }
+    }
+}
+
+.//예제5 중복 null체크
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int? x = null;
+            int y = x ?? -1;
+
+            Console.WriteLine(y);
+
+            x = 10;
+            y=x??-1; 
+            Console.WriteLine(y);
+        }
+    }
+}
+
+조건문
+//예제코드
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int x = int.Parse(Console.ReadLine());
+            if (x % 2 == 0) Console.WriteLine("짝수");
+            else Console.WriteLine("홀수");
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.Write(DateTime.Now.Year+ "년");
+            Console.Write(DateTime.Now.Month+ "월");
+            Console.WriteLine(DateTime.Now.Day+ "일 ");
+            Console.Write(DateTime.Now.Hour+"시 ");
+            Console.Write(DateTime.Now.Minute+"분 ");
+            Console.WriteLine(DateTime.Now.Second+"초");
+            if (DateTime.Now.Hour < 12) Console.WriteLine("오전입니다.");
+            else Console.WriteLine("오후입니다.");
+        }
+    }
+}
+//예제3
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            //Console.Write(DateTime.Now.Year+ "년");
+            //Console.Write(DateTime.Now.Month+ "월");
+            //Console.WriteLine(DateTime.Now.Day+ "일 ");
+            //Console.Write(DateTime.Now.Hour+"시 ");
+            //Console.Write(DateTime.Now.Minute+"분 ");
+            //Console.WriteLine(DateTime.Now.Second+"초");
+            Console.WriteLine(DateTime.Now.ToShortTimeString());
+            if (DateTime.Now.Hour < 12) Console.WriteLine("오전입니다.");
+            else Console.WriteLine("오후입니다.");
+        }
+    }
+}
+//예제4
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("점수를 입력하시오 :");
+            int score = int.Parse(Console.ReadLine());
+            char grade = ' ';
+
+            if (score >= 90) { grade = 'A'; }
+            else if (score >= 80) { grade = 'B'; }
+            else if (score >= 70) { grade = 'C'; }
+            else grade = 'D';
+            Console.WriteLine(grade);
+        }
+    }
+}
+
+//예제5
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+           DateTime now = DateTime.Now;
+            if (now.Hour < 11) Console.WriteLine("아침 먹을 시간입니다");
+            if (now.Hour < 15) Console.WriteLine("점심 먹을 시간입니다");
+            else Console.WriteLine("저녁 먹을 시간입니다");
+        }
+    }
+}
+
+
+switch문
+//예제1
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            string s=Console.ReadLine();
+            switch (s)
+            {
+                case "No":
+                    Console.WriteLine("No 입니다.");
+                    break;
+                case "Yes":
+                    Console.WriteLine("Yes 입니다");
+                    break;
+                default:
+                    Console.WriteLine("아무것도 아닙니다");
+                    break;
+            }
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("요일을 입력하세요(일,월,화,수,목,금,토) :");
+            string s=Console.ReadLine();
+            switch (s)
+            {
+                case "월":
+                    Console.WriteLine("Monday.");
+                    break;
+                case "화":
+                    Console.WriteLine("Tuesday.");
+                    break;
+                case "수":
+                    Console.WriteLine("Wednesday.");
+                    break;
+                case "목":
+                    Console.WriteLine("Thursday.");
+                    break;
+                case "금":
+                    Console.WriteLine("Friday.");
+                    break;
+                case "토":
+                    Console.WriteLine("Saturday.");
+                    break;
+                case "일":
+                    Console.WriteLine("Sunday.");
+                    break;
+                default:
+                    Console.WriteLine($"{s}는 요일이 아닙니다");
+                    break;
+            }
+        }
+    }
+}
+//예제3
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    class foo
+    {
+        public int Id;
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            object obj = null;
+            Console.WriteLine("숫자형태로 입력하시오.");
+            string s=Console.ReadLine();
+            if (int.TryParse(s, out int out_i))
+                obj = out_i;
+            else if (float.TryParse(s, out float out_f))
+                obj = out_f;
+            else if(char.TryParse(s,out char out_ch))
+                obj = out_ch;
+            else
+                obj = s;
+            
+            switch (obj)
+            {
+                case int i when i>=0:
+                    Console.WriteLine("{0}는 양의int 형식입니다.", i);
+                    break;
+                case int i when i < 0:
+                    Console.WriteLine("{0}는 음의int 형식입니다.", i);
+                    break;
+                case float f when f >= 0:
+                    Console.WriteLine("{0}는 양의 float형식입니다.", f);
+                    break;
+                case float f when f < 0:
+                    Console.WriteLine("{0}는 음의 float형식입니다.", f);
+                    break;
+                case char c when c>='a' && c<='z':
+                    Console.WriteLine("{0}는 영문 소문자char형식입니다.", c);
+                    break;
+                case char c when c>='A' && c<='Z':
+                    Console.WriteLine("{0}는 영문 대문자char형식입니다.", c);
+                    break;
+                default: 
+                    Console.WriteLine("{0}은 모르는 형식입니다.", obj);
+                    break;
+
+            }
+        }
+    }
+}
+//예제 4
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("활살표 입력 :");
+            ConsoleKeyInfo keyInfo = Console.ReadKey();
+            switch(keyInfo.Key)
+            {
+                case ConsoleKey.UpArrow:
+                    Console.WriteLine("위로 이동");
+                    break;
+                case ConsoleKey.DownArrow:
+                    Console.WriteLine("아래로 이동");
+                    break;
+                case ConsoleKey.LeftArrow:
+                    Console.WriteLine("좌로 이동");
+                    break;
+                case ConsoleKey.RightArrow:
+                    Console.WriteLine("우로 이동");
+                    break;
+            }
+
+        }
+    }
+}
+//예제 5
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    public struct Point
+    {
+        public int x; public int y;
+        public void get_x(int x)
+        {
+            this.x = x;
+        }
+        public void get_y(int y) {  this.y = y; }
+        public void get_point()
+        {
+            if (x > 0)
+            {
+                if (y > 0) Console.WriteLine("1사분면");
+                else Console.WriteLine("4사분면");
+            }
+            else
+            {
+                if (y >0) Console.WriteLine("2사분면");
+                else Console.WriteLine("3사분면");
+            }
+        }
+    }
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+           Point x = new Point();
+           x.get_x(int.Parse(Console.ReadLine()));
+            x.get_y(int.Parse(Console.ReadLine()));
+            x.get_point();
+        }
+    }
+}
+
+반복문
+//예제 1
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int i = 10;
+            do
+            {
+                Console.WriteLine("a)i:{0}", i--);
+            } while (i != 0);
+            do
+            {
+                Console.WriteLine("a)i:{0}", i--);
+            } while (i > 0);
+        }
+    }
+}
+
+foreach문
+배열이나 컬렉션의 값을 순차적으로 읽어오는 반복문
+-배열 -여러개의 데이터를 담는 코드 요소
+-컬렉션-여러 개체가 모여서 집합을 이룬것 배열과 비슷하나 데이터 저장 및 엑세스 방식이 다름
+//예제1
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            ArrayList a = new ArrayList();
+            a.Add(1); a.Add(2); a.Add(3);
+            Console.WriteLine(a);
+            foreach (int i in a)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            string[] arr = { "사과", "배", "포도", "딸기", "바나나" };
+            Console.WriteLine("Foreach와 var를 통해 출력하기");
+            foreach (var s in arr) Console.WriteLine(s); //인자의 값을 지정하기 싫을 때 var
+        }
+    }
+}
+
+점프문 :실행흐름을 끊거나 실행위치를 우너하는곳으로 이동
+//예제1
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            while(true)
+            {
+                Console.WriteLine("계속할까요?| o | x |");
+                string s= Console.ReadLine();
+
+                if (s == "x") break;
+            }
+        }
+    }
+}
+//예제2
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            while(true)
+            {
+                Console.WriteLine("계속할까요?");
+                Console.WriteLine("---------");
+                Console.WriteLine("| o | x |");
+                Console.WriteLine("---------");
+                string s= Console.ReadLine();
+
+                if (s == "x") break;
+            }
+        }
+    }
+}
+//예제 3 Test
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Runtime.ExceptionServices;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _0711
+{
+    internal class Scond
+    {
+        static void Main(string[] args)
+        {
+            int n = 1;
+            for(int i = 0; i < 8; i++,n+=2)
+            {
+                for(int j=0; j < 7 - i; j++)
+                {
+                    Console.Write(' ');
+                }
+                for(int j = 0; j < n; j++)
+                {
+                    Console.Write("*");
+                }
+                Console.WriteLine();
+            }
+        }
+    }
+}

@@ -1,0 +1,294 @@
+WinForm : C#에서 UI
+C# -> IL -> CLR -> 운영체제 -> CLR -> IL -> C#
+( 컴파일 )->(가상환경)->운영체제->(가상환경)->(컴파일)
+C# : c++을 사용한 윈도 개발을 위한 언어 이언어를 활요해 GUI를 제공할 수 있다.
+IL or CIL : C#을 컴파일하면 CPU와 OS에 독립적인 중간 기계어 코드로 변경됨 그것이 IL
+CLR : CLR이라는 가상 머신이 존재 코드를 IL을 읽어 기계코드로 번역 실행파일로 만든다.
+
+(IL을 보면 독립적인 기계어로 변경하기 때문에 Os에서 인식을 하지 못해 
+가상환경 위에서 돌려야하기 때문에CLR에 들렸다가 가야한다. ) 
+CLR이 IL을 읽어 실행파일로 만드는것을 (JUST IN TIME이라함)
+
+C# 활용방안 :
+-Unity로 게임 개발
+-Asp.net로 웹개발
+-IOT 개발
+
+C#특징:
+-객체지향
+-캡슐화
+-객체지향과 캡슐화를 통해 모듈화가 가능
+-extend (상속)
+-추상화 : 각 객체의 속성과 기능 추출하여 정의 각 객체의 특징을 모은다는 뜻 
+ex)
+포유류 + 두발로 산다 => 인간
+등
+-오버 로딩 : 이미 선언된 함수를 같은이름의 다른 매개변수와 반환형으로 추가적으로 만드는것
+-오버라이딩 : 이미 선언된 함수를 다른 목표를 이루기위해 함수의 형태로 변경하는것
+
+
+C# 장점
+-재사용성
+-생산성
+-유지보수
+
+C#단점
+-개발속도 느림
+-실행속도가 느림 : 객체지향언어는 대체적으로 실행속도가 느림 c++예외
+-코딩난이도 상승 : 다중상속이 지원되는 C++같은 경우 너무 복잡해져 코딩의 난이도가 상승할 수 있음
+
+주요 헤더
+System(java? 여튼 c/c++에서의 stdio와 같은 루트 라이브러리)
+
+//예제 코드
+
+구조체 클래스 인터페이스 등의 모든 프로그램 구조들은 namespace 안에 넣어야 사용가능하다
+
+//출력 예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            Console.WriteLine("Hellow World");
+            Console.WriteLine("{0} {1}", 3.14f, 12);
+            Console.WriteLine("{0} + {1} = {2}", 1, 2, 1 + 2);
+        }
+    }
+}
+
+변수 : int ,double ,char ,object
+상수 : 변하지 않는 수
+변수와 상수화 : 한번만 초기화 할 수 있는수 const
+리터럴 : 그 자체로 데이터을 의미 변수에 넣는 변하지 않는 데이터
+힙과 참조 형식 : 가비지 컬렉터 : 청소부 역활 더 이상 사용하지 않는 데이터는 가비지 컬렉터가 제거
+힙에 저장하는 자료형 : object(포인터)
+스택에 저장하는 자료형 : int,double,char등 지역변수 역활을 맡은 변수들
+식별자 : 클래스 속성 메서드 네임스페이스의 이름은 항상 대문자로 시작
+ex)applyjuice -> ApplyJuice 단어시작부분을 대문자로
+-이름뒤에 ( )가 있으면 메서드 괄호안에 들어가는 것은 매개변수
+데이터형 : System에 정의되어있음 찾아보기
+//예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            byte a = 255;
+            sbyte b= (sbyte)a;
+            WriteLine($"a={a}"); //php와 같이 문자열앞에 $를 붙임으로 문자열안에 { 변수명 }과 같은 형태로 데이터 출력가능
+            WriteLine($"b={b}"); 
+        }
+    }
+}
+
+//예제코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            sbyte a = -10;
+            byte b = 40;
+            WriteLine($"a={a} b={b}");
+
+            short c = -30000;
+            ushort d = 60000;
+            WriteLine($"c={c} d={d}");
+
+            int e = -10000_0000;
+            uint f = 3_0000_0000;
+            WriteLine($"e={e} f={f}");
+
+            long g = -5000_0000_00000;
+            ulong h = 200_0000_0000_0000_0000;
+            WriteLine($"g={g} h={h}");
+        }
+    }
+}
+
+//예약 변수 예제코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            WriteLine("{0} ~ {1}",long.MinValue,long.MaxValue);
+        }
+    }
+}
+//진수변환 예시코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            byte a = 240;
+            WriteLine($"a={a}");
+
+            byte b = 0b1111_0000; //2진수->10진
+            WriteLine($"b={b}");
+
+            byte c = 0xF0; //16진수->10진
+            WriteLine($"c={c}");
+
+            uint d = 0x1234_abcd; //16진수
+            WriteLine($"d={d}");
+        }
+    }
+}
+
+
+실수형
+정수 형식을 대체 못함 : 부호1비트 지수 11비트? 나머지 기수로 사용하기 때문에 정수를 모두 표현못함
+그래서 decimal이라는 변수가 나타남 16byte를 지님
+※
+지수 : .앞에 3.
+기수 : .뒤에 0.12345648....
+//예제 코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            float a = 3.1415_9265_3589_7932_3846_2643_3832_79f;
+            double b = 3.1415_9265_3589_7932_3846_2643_3832_79;
+            decimal c = 3.1415_9265_3589_7932_3846_2643_3832_79m;
+
+            WriteLine($"a={a}");
+            WriteLine($"b={b}");
+            WriteLine($"c={c}");
+        }
+    }
+}
+
+문자형 c에서 1byte 였던것이 2byte로 커짐
+//예시코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static void Main(String[] args)
+        {
+            int number = '7';
+            int number1 = 'A';
+            WriteLine($"캐릭터'7'은 문자상수 {number}이다.");
+            WriteLine($"캐릭터'A'은 문자상수 {number1}이다.");
+        }
+    }
+}
+
+string 문자열형 :문자열이 동적으로 정해지기때문에 힙에 저장되며 sizeof로 크기를 측정할 수 없다
+불 자료형 : 참과 거짓을 반환한다 c와는 다르게 0과 1이 거짓과 참을 대신할 수 없다 전역변수로 사용시 c에서는 0이 나왔던거 처럼 False로 초기화 된다.
+단 지역변수로 사용시 초기화 하지 않으면 오류가 발생한다.
+//예시코드
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static bool boolVar;
+        static void Main(String[] args)
+        {
+            bool localBoolVar = true;
+            WriteLine($"{boolVar} {localBoolVar}");
+        }
+    }
+}
+object 자료형 : 어떤 자료형이든 다룰 수 있는 데이터 형식 상속의 효과 참조형식(포인터)임으로 힙에 저장됨
+주요내용 object형식은 모든 자료형을 담을 수 있다.
+c# or python
+a=123
+스택에 a저장 a는 힙에 선언된 123변수의 주소값을 가짐 (스택[포인터 변수가 저장되는 장소] -> 힙)
+c or c++
+int a=123;
+int *pa = &a;
+스택에 a저장 pa는 힙선언되어서 스택에있는 a를 가르킴 (스택[포인터 변수가 저장되는 장소] -> 정적변수면 스택 동적변수면 힙 )
+//예시코드 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using static System.Console;
+
+namespace Hellow
+{
+    internal class Program
+    {
+        static bool boolVar;
+        static void Main(String[] args)
+        {
+            object a = 123;
+            object b = 3.1415_9265_3589_7932_3846_2643_3832_79m;
+            object c = true;
+            object d = "안녕하세요";
+
+            WriteLine(a);
+            WriteLine(b);
+            WriteLine(c);
+            WriteLine(d);
+        }
+    }
+}
